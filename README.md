@@ -1,6 +1,8 @@
 # DelegatedAdminApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
+Node 8
+NPM 6
 
 ## Development server
 
