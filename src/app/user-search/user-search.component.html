@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <div class="form-horizontal col-md-5">
+      <form [formGroup]="userForm" #form="ngForm" class="example-form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <mat-select [(ngModel)]="selectedValue"  [ngModelOptions]="{standalone: true}" placeholder="Kategorija" required>
+              <mat-option *ngFor="let c of category" [value]="c">
+                {{ c.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+              <mat-select [(ngModel)]="selectedAttribute" [ngModelOptions]="{standalone: true}" placeholder="Atribut" required>
+                <mat-option *ngFor="let f of filter" [value]="f">
+                  {{ f.attribute }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+              <input matInput placeholder="Unesite vrednost" formControlName="value">
+            </mat-form-field>
+        </div>
+        <button mat-raised-button color="primary" [disabled]="form.invalid">Pretraži</button>
+      </form>
+    </div>
+  </div>
+  <hr />
+
+  <div *ngIf="!hiddenTable">
+      <div class="example-header">
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </mat-form-field>
+        </div>
+        <div class="example-container mat-elevation-z8">
+  
+            <table mat-table [dataSource]="dataSource" matSort>
+          
+              <ng-container matColumnDef="Ime i prezime">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ime i prezime </th>
+                <td mat-cell *matCellDef="let row"> {{row.uid}} {{ row.sn }}</td>
+              </ng-container>
+          
+              <ng-container matColumnDef="E-mail">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </th>
+                <td mat-cell *matCellDef="let row"> {{row.mail}} </td>
+              </ng-container>
+          
+              <ng-container matColumnDef="Opcije">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Opcije </th>
+                <td mat-cell *matCellDef="let row"> izmeni/obrisi </td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+              </tr>
+            </table>
+          
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+          </div>
+
+  </div>
+  
+  
+
+
+</div>

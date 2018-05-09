@@ -1,0 +1,42 @@
+{
+	"dn": "uid=ranko,ou=People,o=domen1.rs,o=isp",
+	"attributes": [{
+		"name": "Objectclass",
+		"values": [{
+			"value": "top"
+		},
+		{
+			"value": "person"
+		},
+		{
+			"value": "account"
+		},
+		{
+			"value": "inetOrgPerson"
+		}]
+	},
+	{
+		"name": "uid",
+		"values": [{
+			"value": "ranko"
+		}]
+	},
+	{
+		"name": "cn",
+		"values": [{
+			"value": "ranko"
+		}]
+	},
+	{
+		"name": "sn",
+		"values": [{
+			"value": "stanojevic"
+		}]
+	},
+	{
+		"name": "mail",
+		"values": [{
+			"value": "ranko.stanojevic@example.com"
+		}]
+	}]
+}

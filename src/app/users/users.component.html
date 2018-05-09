@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="form-horizontal col-md-5">
+      <form class="example-form" [formGroup]="userForm" #form="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Ime" formControlName="firstName" required>
+            <mat-hint>Unesite ime korinsika</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Prezime" formControlName="lastName" required>
+            <mat-hint>Unesite prezime korinsika</mat-hint>
+          </mat-form-field>
+        </div>
+        <button type="submit" class="btn btn-primary crni" [disabled]="!form.valid">Kreiraj</button>
+        <hr />
+      </form>
+      <div *ngIf="!IsHidden">
+        <div class="alert alert-success" *ngIf="onlyStatus === 'SUCCESS'; else errorResponse">
+          <strong>{{ message }}</strong>
+        </div>
+        <ng-template #errorResponse>
+          <div class="alert alert-danger">
+            <strong>{{ message }}</strong>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+<pre>{{ jsonRequest | json }}</pre>
