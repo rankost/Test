@@ -1,0 +1,32 @@
+## Running on oracle cloud server
+
+npm install -g @angular/cli
+npm install http-server -g
+
+npm -v 
+6.0.0
+
+ng -v
+
+Angular CLI: 6.0.0
+Node: 10.0.0
+
+Package                      Version
+------------------------------------------------------
+@angular-devkit/architect    0.6.0
+@angular-devkit/core         0.6.0
+@angular-devkit/schematics   0.6.0
+@schematics/angular          0.6.0
+@schematics/update           0.6.0
+rxjs                         6.1.0
+typescript                   2.7.2
+------------------------------------------------------
+
+
+
+1. Clone repository from github.
+2. cd da/
+3. npm install
+4. ng build
+5. cd dist/delegatedAdminApp/
+6. http-server . -p 8081
