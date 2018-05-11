@@ -13,12 +13,14 @@ import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { RouterModule,Routes } from '@angular/router';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
-    UserSearchComponent
+    UserSearchComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import { RouterModule,Routes } from '@angular/router';
     MatPaginatorModule,
     RouterModule.forRoot([
       {path:'users',component:UsersComponent},
-      {path:'user-search',component:UserSearchComponent}
+      {path:'user-search',component:UserSearchComponent},
+      {path: 'login', component:LoginComponent}
 
     ])
   ],
