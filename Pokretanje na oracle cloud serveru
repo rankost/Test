@@ -26,7 +26,7 @@ typescript                   2.7.2
 
 1. Clone repository from github.
 2. cd da/
-3. npm install
+3. npm install (npm install --unsafe-perm)
 4. ng build
 5. cd dist/delegatedAdminApp/
 6. http-server . -p 8081
