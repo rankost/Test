@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import "reflect-metadata";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTableModule} from '@angular/cdk/table';
-import {MatButtonModule, MatCheckboxModule, MatSelectModule, MatInputModule, MatTableModule, MatPaginatorModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatSelectModule, MatInputModule, MatTableModule, MatPaginatorModule, } from '@angular/material';
 
 
 import { AppComponent } from './app.component';
