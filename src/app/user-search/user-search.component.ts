@@ -47,6 +47,7 @@ export class UserSearchComponent implements OnInit {
   constructor(private _userService: UserServiceService) { }
 
   ngOnInit() {
+    this.onSubmit();
   }
 
   applyFilter(filterValue: string) {
@@ -59,11 +60,12 @@ export class UserSearchComponent implements OnInit {
   onSubmit(){
     if(this.selectedValue !== null) {
       this.baseDN ="ou=" + this.selectedValue.name +","+ "o=domen1.rs,o=isp";
- 
-    }
+    } else { this.baseDN = "o=domen1.rs,o=isp"; } 
+
     if(this.selectedAttribute !== null && this.userForm.value.value !== null) {
       this.filterString = "(" + this.selectedAttribute.attribute + "=" + this.userForm.value.value + ")";
     }
+    else { this.filterString = "(uid=*)"; } //pri prvom pozivu vrednosti su null, uid=* je default
 
     this._userService.getUser(this.baseDN, this.scope, this.filterString)
     .subscribe(

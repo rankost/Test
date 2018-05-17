@@ -7,6 +7,7 @@ import "reflect-metadata";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTableModule} from '@angular/cdk/table';
 import {MatButtonModule, MatCheckboxModule, MatSelectModule, MatInputModule, MatTableModule, MatPaginatorModule, } from '@angular/material';
+import { AuthGuard } from './auth.guard';
 
 
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { UsersComponent } from './users/users.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { RouterModule,Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -35,15 +37,27 @@ import { LoginComponent } from './login/login.component';
     CdkTableModule,
     MatPaginatorModule,
     RouterModule.forRoot([
-      {path: '', component:LoginComponent},
-      {path:'users',component:UsersComponent},
-      {path:'user-search',component:UserSearchComponent},
-      {path: 'login', component:LoginComponent}
-      
-
+      {
+        path: '', 
+        component:LoginComponent
+      },
+      {
+        path:'users',
+        component:UsersComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path:'user-search',
+        component:UserSearchComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'login', 
+        component:LoginComponent
+      }
     ])
   ],
-  providers: [],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
