@@ -35,9 +35,11 @@ import { LoginComponent } from './login/login.component';
     CdkTableModule,
     MatPaginatorModule,
     RouterModule.forRoot([
+      {path: '', component:LoginComponent},
       {path:'users',component:UsersComponent},
       {path:'user-search',component:UserSearchComponent},
       {path: 'login', component:LoginComponent}
+      
 
     ])
   ],

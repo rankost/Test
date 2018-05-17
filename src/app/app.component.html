@@ -1,23 +1,28 @@
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="assets/MTS-Telekom-final-logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      Delegated Admin - Telekom
+    </a>
+  </nav>
+
+
 <div id="container-navbar">
   <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+      <a routerLink="/login" href="#" (click)="closeNav()">Prijavi se</a>
+      <br>
       <a routerLink="/users" href="#" (click)="closeNav()">Unesi korisnika</a>
       <br>
       <a routerLink="/user-search" href="#" (click)="closeNav()">Pregled korisnika</a>
-      <br>
-      <a href="#">Azuriraj korisnika</a>
-      <br>
-      <a href="#">Obrisi korisnika</a>
   </div>
-
-  <!-- Use any element to open the sidenav -->
   <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776; Meni</span>
 
-  <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
   <div id="main">
-      <div id="container">
-          <router-outlet></router-outlet>
-          <!-- <app-login></app-login> -->
+      <div id="container" class="container">
+          <div class="jumbotron">
+                <router-outlet></router-outlet>
+          </div>
+          
       </div>
   </div>
 </div>
