@@ -2,9 +2,6 @@
     margin-top:80px;
     padding:30px;
 }
-input.ng-invalid.ng-touched{
-    border: 1px solid red;
-}
 .btn.btn-primary.crni{
 
     background-color: black;

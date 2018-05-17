@@ -16,10 +16,13 @@ import {ErrorStateMatcher} from '@angular/material/core';
 })
 
 export class UsersComponent implements OnInit {
-  userForm = new FormGroup ({
-    firstName: new FormControl(),
-    lastName: new FormControl(),
-  });
+  // userForm = new FormGroup ({
+    firstName = new FormControl('', [ Validators.required ]);
+    lastName = new FormControl('', [ Validators.required ]);
+  // });
+
+
+  matcher = new MyErrorStateMatcher();
 
 
   user: createJsonMode = new createJsonMode();
@@ -33,6 +36,11 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  notEntered() {
+    return this.firstName.hasError('required') || this.lastName.hasError('required');
+  }
+
   onSubmit() {
 
     // this.user.dn = "uid=" + this.userForm.value.firstName + ",ou=People,o=domen1.rs,o=isp"
@@ -58,22 +66,22 @@ export class UsersComponent implements OnInit {
     valuesObjClas.push({"value": "inetOrgPerson"});
     attributes.push({"name": "Objectclass", "values": valuesObjClas});
     
-    valuesUid.push({"value": this.userForm.value.firstName});
+    valuesUid.push({"value": this.firstName.value});
     attributes.push({"name": "uid", "values": valuesUid});
 
-    valuesCN.push({"value": this.userForm.value.firstName});
+    valuesCN.push({"value": this.firstName.value});
     attributes.push({"name": "cn", "values": valuesCN});
 
-    valuesSN.push({"value": this.userForm.value.lastName});
+    valuesSN.push({"value": this.lastName.value});
     attributes.push({"name": "sn", "values": valuesSN});
 
     valuesInetUser.push({"value": "active"});
     attributes.push({"name": "inetUserStatus", "values": valuesInetUser});
 
-    valuesMail.push({"value": this.userForm.value.firstName + "." + this.userForm.value.lastName + "@example.com"});
+    valuesMail.push({"value": this.firstName.value + "." + this.lastName.value + "@example.com"});
     attributes.push({"name": "mail", "values": valuesMail});
 
-    formResult = {"dn": "uid=" + this.userForm.value.firstName + ",ou=People,o=domen1.rs,o=isp", "attributes": attributes};
+    formResult = {"dn": "uid=" + this.firstName.value + ",ou=People,o=domen1.rs,o=isp", "attributes": attributes};
 
     this.jsonRequest = formResult;
 
@@ -87,5 +95,12 @@ export class UsersComponent implements OnInit {
       },
       (error: Error) => {  console.log(error) }
     );
+  }
+}
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }

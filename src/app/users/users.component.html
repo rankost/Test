@@ -1,20 +1,22 @@
 <div class="container">
   <div class="row">
     <div class="form-horizontal col-md-5">
-      <form class="example-form" [formGroup]="userForm" #form="ngForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
+      <form class="example-form" (ngSubmit)="onSubmit()">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Ime" formControlName="firstName" required>
+            <input matInput placeholder="Ime" [formControl]="firstName" [errorStateMatcher]="matcher" >
             <mat-hint>Unesite ime korinsika</mat-hint>
+            <mat-error *ngIf="firstName.hasError('required')">
+              Ime je <strong>obavezno!</strong>
+            </mat-error>
           </mat-form-field>
-        </div>
-        <div class="form-group">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Prezime" formControlName="lastName" required>
+            <input matInput placeholder="Prezime" [formControl]="lastName" [errorStateMatcher]="matcher" >
             <mat-hint>Unesite prezime korinsika</mat-hint>
+            <mat-error *ngIf="lastName.hasError('required')">
+              Prezime je <strong>obavezno!</strong>
+            </mat-error>
           </mat-form-field>
-        </div>
-        <button type="submit" class="btn btn-primary crni" [disabled]="!form.valid">Kreiraj</button>
+        <button type="submit" class="btn btn-primary crni" [disabled]="notEntered()" >Kreiraj</button>
         <hr />
       </form>
       <div *ngIf="!IsHidden">
@@ -30,4 +32,3 @@
     </div>
   </div>
 </div>
-<pre>{{ jsonRequest | json }}</pre>
