@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   password = new FormControl();
 
   bindDN: string;
-
+  hide = true;
   constructor(private Auth: AuthService, private router: Router) { }
 
   ngOnInit() {

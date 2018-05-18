@@ -9,13 +9,17 @@ import { UserServiceService } from '../user-service.service';
 })
 export class UserDetailsComponent implements OnInit {
 
+  user: any;
+
   constructor(private route: ActivatedRoute, private UserServce: UserServiceService) {
     this.route.params.subscribe( params => 
       {
       const filter = "(uid=" + params.uid + ")";
       this.UserServce.getUser("o=domen1.rs,o=isp", "SUB", filter).subscribe(
-        data => console.log(JSON.stringify(data))
-      );
+        data => { 
+          console.log(JSON.stringify(data));
+          this.user = data.ldapSearch[0];
+        });
     });
    }
 

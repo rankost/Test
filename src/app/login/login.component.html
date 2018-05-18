@@ -3,7 +3,7 @@
       <input matInput placeholder="Login ID" [formControl]="username" >
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Šifra" [formControl]="password" >
+      <input matInput placeholder="Šifra" [type]="hide ? 'password' : 'text'" [formControl]="password" >
     </mat-form-field>
     <button class="btn btn-lg btn-success" >Prijavi se</button>
   </form>

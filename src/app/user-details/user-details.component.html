@@ -1,3 +1,31 @@
-<p>
-  user-details works!
-</p>
+<h2>Informacije o korisniku</h2>
+<hr />
+<form class="example-form" *ngIf="user != null">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Login ID" disabled value="{{ user.uid }}">
+  </mat-form-field>
+
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td><mat-form-field class="example-full-width">
+      <input matInput placeholder="Ime" value="{{ user.cn }}">
+    </mat-form-field></td>
+    <td><mat-form-field class="example-full-width">
+      <input matInput placeholder="Prezime" value="{{ user.sn }}">
+    </mat-form-field></td>
+  </tr></table>
+</form>
+<h2>Kontakt informacije</h2>
+<hr />
+<form class="example-form" *ngIf="user != null">
+
+</form>
+<h2>Mail servis detalji</h2>
+<hr />
+<form class="example-form" *ngIf="user != null">
+
+</form>
+<h2>Kalendar servis detalji</h2>
+<hr />
+<form class="example-form" *ngIf="user != null">
+
+</form>
