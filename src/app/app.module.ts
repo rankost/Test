@@ -16,13 +16,15 @@ import { UserSearchComponent } from './user-search/user-search.component';
 import { RouterModule,Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
     UserSearchComponent,
-    LoginComponent
+    LoginComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,9 @@ import { AuthService } from './auth.service';
       {
         path: 'login', 
         component:LoginComponent
+      },
+      {
+        path: 'user-details/:uid', component: UserDetailsComponent
       }
     ])
   ],

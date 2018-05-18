@@ -3,6 +3,7 @@ import { UserServiceService } from '../user-service.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {DataSource} from '@angular/cdk/table';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -44,7 +45,7 @@ export class UserSearchComponent implements OnInit {
 
   // za tabelu
   
-  constructor(private _userService: UserServiceService) { }
+  constructor(private _userService: UserServiceService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.onSubmit();
@@ -54,6 +55,10 @@ export class UserSearchComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  onDetails(uid: string) {
+    this.router.navigate(['user-details', uid]);
   }
 
 

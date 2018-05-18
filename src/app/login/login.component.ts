@@ -32,12 +32,13 @@ export class LoginComponent implements OnInit {
         this.Auth.setLoggedIn(true);
         this.bindDN = result.bindDN;
       
+      
       }
       else if (result.resultStatus === 'FAILURE')
       {
-
+        window.alert("Uneti su pogrešni podaci!");
       }
-      else { }
+      else { window.alert("Došlo je do greške!"); }
     })
   }
 

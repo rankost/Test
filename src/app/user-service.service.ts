@@ -46,7 +46,6 @@ export class UserServiceService {
     return this._http.get(_userPostUrl).map(
       (response) => { 
         var resJson = JSON.parse(JSON.stringify(response));
-        console.log("ovo je result u json string: "+ JSON.stringify(resJson));
 
         return resJson;
        }
