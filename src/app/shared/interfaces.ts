@@ -9,4 +9,3 @@ export interface User {
   export interface ValuesEntity {
     value: string;
   }
-  

@@ -1,25 +1,32 @@
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
-      <img src="assets/MTS-Telekom-final-logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      Delegated Administrator - Telekom
+        <img src="assets/MTS-Telekom-final-logo.png" width="30" height="30" class="d-inline-block align-top" alt=""> Delegated Administrator
     </a>
-  </nav>
+</nav>
 <div id="container-navbar">
-  <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-      <a routerLink="/login" href="#" (click)="closeNav()">Prijavi se</a>
-      <br>
-      <a routerLink="/users" href="#" (click)="closeNav()">Unesi korisnika</a>
-      <br>
-      <a routerLink="/user-search" href="#" (click)="closeNav()">Pregled korisnika</a>
-  </div>
-  <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776; Meni</span>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+        <div *ngIf="isSessionExist(); then logoutcontent; else logincontent"></div>
+        <ng-template #logincontent>
+                <a routerLink="/login" href="#" (click)="closeNav()">Prijavi se</a>
+        </ng-template>
+        <ng-template #logoutcontent>
+            <a routerLink="/login" href="#" (click)="closeNav(); logout()">Odjavi se</a>
+        </ng-template>
+        <div *ngIf="isSessionExist()">
+            <br>
+            <a routerLink="/users" href="#" (click)="closeNav()">Unesi korisnika</a>
+            <br>
+            <a routerLink="/user-search" href="#" (click)="closeNav()">Pregled korisnika</a>
+        </div>
+    </div>
+    <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776; Meni</span>
 
-  <div id="main">
-      <div id="container" class="container">
-          <div class="jumbotron">
+    <div id="main">
+        <div id="container" class="container">
+            <div class="jumbotron">
                 <router-outlet></router-outlet>
-          </div>
-      </div>
-  </div>
+            </div>
+        </div>
+    </div>
 </div>
