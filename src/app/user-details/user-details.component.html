@@ -1,4 +1,4 @@
-<h2>Informacije o korisniku</h2>
+<h3>Informacije o korisniku</h3>
 <hr />
 <form class="example-form" *ngIf="user != null">
   <mat-form-field class="example-full-width">
@@ -13,19 +13,54 @@
       <input matInput placeholder="Prezime" value="{{ user.sn }}">
     </mat-form-field></td>
   </tr></table>
+  <div class="form-group">
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="Status korisnika" value="{{ user.inetUserStatus }}">
+        </mat-form-field>
+  </div>
 </form>
-<h2>Kontakt informacije</h2>
+<h3>Kontakt informacije</h3>
 <hr />
 <form class="example-form" *ngIf="user != null">
 
 </form>
-<h2>Mail servis detalji</h2>
+<h3>Mail servis detalji</h3>
 <hr />
 <form class="example-form" *ngIf="user != null">
+  <div class="form-group">
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="Mail host" value="{{ user.mailHost }}">
+        </mat-form-field>
+  </div>
+  <div class="form-group">
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email adresa" value="{{ user.mail }}">
+        </mat-form-field>
+  </div>
+  <div class="form-group">
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="Broj poruka" value="{{ user.mailMsgQuota }}">
+        </mat-form-field>
+  </div>
+  <div class="form-group">
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="Mail servis status" value="{{ user.mailUserStatus }}">
+        </mat-form-field>
+  </div>
+
 
 </form>
-<h2>Kalendar servis detalji</h2>
+<h3>Kalendar servis detalji</h3>
 <hr />
 <form class="example-form" *ngIf="user != null">
-
+    <div class="form-group">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Vremenska zona" value="{{ user.icsTimezone }}">
+          </mat-form-field>
+    </div>
+    <div class="form-group">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Klandar servis status" value="{{ user.icsStatus }}">
+          </mat-form-field>
+    </div>
 </form>
