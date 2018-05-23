@@ -32,6 +32,42 @@
             </mat-error>
           </mat-form-field>
         </div>
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <mat-select [(ngModel)]="selectedLanguage"  [ngModelOptions]="{standalone: true}" placeholder="Jezik">
+              <mat-option *ngFor="let l of languages" [value]="l.id">
+                {{ l.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <mat-select [(ngModel)]="selectedPackage"  [ngModelOptions]="{standalone: true}" placeholder="Servisni paket">
+              <mat-option *ngFor="let p of packages" [value]="p.id">
+                {{ p.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div *ngIf="selectedPackage != null">
+          <h3>Podešavanja servisnog paketa</h3>
+
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Mesto na disku" [formControl]="mailQuota" >
+              <mat-hint>Koristite K, M, G za kilo, mega, i giga bytes respektivno</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Broj poruka" [formControl]="mailMsgQuota" >
+              <mat-hint>Broj poruka</mat-hint>
+            </mat-form-field>
+          </div>
+
+        </div>
         <button mat-raised-button color="primary" [disabled]="notEntered()">Kreiraj</button>
         <hr />
       </form>

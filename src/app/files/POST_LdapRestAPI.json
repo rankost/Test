@@ -1,42 +1,84 @@
 {
-	"dn": "uid=ranko,ou=People,o=domen1.rs,o=isp",
-	"attributes": [{
-		"name": "Objectclass",
-		"values": [{
-			"value": "top"
-		},
-		{
-			"value": "person"
-		},
-		{
-			"value": "account"
-		},
-		{
-			"value": "inetOrgPerson"
-		}]
-	},
-	{
-		"name": "uid",
-		"values": [{
-			"value": "ranko"
-		}]
-	},
-	{
-		"name": "cn",
-		"values": [{
-			"value": "ranko"
-		}]
-	},
-	{
-		"name": "sn",
-		"values": [{
-			"value": "stanojevic"
-		}]
-	},
-	{
-		"name": "mail",
-		"values": [{
-			"value": "ranko.stanojevic@example.com"
-		}]
-	}]
+   "dn":"uid=Dragisa,ou=People,o=domen1.rs,o=isp",
+   "attributes":[
+      {
+         "name":"Objectclass",
+         "values":[
+            {
+               "value":"top"
+            },
+            {
+               "value":"person"
+            },
+            {
+               "value":"account"
+            },
+            {
+               "value":"inetuser"
+            },
+            {
+               "value":"inetOrgPerson"
+            },
+            {
+               "value":"ipuser"
+            }
+         ]
+      },
+      {
+         "name":"uid",
+         "values":[
+            {
+               "value":"Dragisa"
+            }
+         ]
+      },
+      {
+         "name":"cn",
+         "values":[
+            {
+               "value":"Dragisa"
+            }
+         ]
+      },
+      {
+         "name":"sn",
+         "values":[
+            {
+               "value":"Markovic"
+            }
+         ]
+      },
+      {
+         "name":"inetUserStatus",
+         "values":[
+            {
+               "value":"active"
+            }
+         ]
+      },
+      {
+         "name":"userPassword",
+         "values":[
+            {
+               "value":"dragisa"
+            }
+         ]
+      },
+      {
+         "name":"mail",
+         "values":[
+            {
+               "value":"Dragisa.markovic@example.com"
+            }
+         ]
+      },
+         {
+         "name":"inetcos",
+         "values":[
+            {
+               "value":"neptune"
+            }
+         ]
+      }
+   ]
 }
