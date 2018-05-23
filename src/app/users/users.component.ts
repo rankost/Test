@@ -19,6 +19,7 @@ export class UsersComponent implements OnInit {
   // userForm = new FormGroup ({
     firstName = new FormControl('', [ Validators.required ]);
     lastName = new FormControl('', [ Validators.required ]);
+    password = new FormControl('', [ Validators.required ]);
   // });
 
 
@@ -26,7 +27,6 @@ export class UsersComponent implements OnInit {
 
 
   user: createJsonMode = new createJsonMode();
-  jsonRequest: any;
   onlyStatus: string;
   message: string;
   IsHidden= true;
@@ -58,12 +58,14 @@ export class UsersComponent implements OnInit {
     var valuesSN = [];
     var valuesMail = [];
     var valuesInetUser = [];
+    var valuesUserPassword = [];
 
     valuesObjClas.push({"value": "top"});
     valuesObjClas.push({"value": "person"});
     valuesObjClas.push({"value": "account"});
     valuesObjClas.push({"value": "inetuser"});
     valuesObjClas.push({"value": "inetOrgPerson"});
+    valuesObjClas.push({"value": "ipuser"});
     attributes.push({"name": "Objectclass", "values": valuesObjClas});
     
     valuesUid.push({"value": this.firstName.value});
@@ -78,15 +80,17 @@ export class UsersComponent implements OnInit {
     valuesInetUser.push({"value": "active"});
     attributes.push({"name": "inetUserStatus", "values": valuesInetUser});
 
+    valuesUserPassword.push({"value": this.password.value});
+    attributes.push({"name": "userPassword", "values": valuesUserPassword});
+
     valuesMail.push({"value": this.firstName.value + "." + this.lastName.value + "@example.com"});
     attributes.push({"name": "mail", "values": valuesMail});
 
     formResult = {"dn": "uid=" + this.firstName.value + ",ou=People,o=domen1.rs,o=isp", "attributes": attributes};
 
-    this.jsonRequest = formResult;
 
 
-    this._userService.addUser(this.jsonRequest)
+    this._userService.addUser(formResult)
     .subscribe(
       (data: resultStatus) => { 
         this.onlyStatus = data.resultStatus

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
@@ -38,7 +38,7 @@ export class UserSearchComponent implements OnInit {
   hiddenTable: boolean = true;
 
   displayedColumns = ['Ime i prezime', 'E-mail', 'Opcije'];
-  dataSource: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<ldapSearchData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -50,7 +50,7 @@ export class UserSearchComponent implements OnInit {
   ngOnInit() {
     this.onSubmit();
   }
-
+  
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
@@ -70,7 +70,7 @@ export class UserSearchComponent implements OnInit {
     if(this.selectedAttribute !== null && this.userForm.value.value !== null) {
       this.filterString = "(" + this.selectedAttribute.attribute + "=" + this.userForm.value.value + ")";
     }
-    else { this.filterString = "(uid=*)"; } //pri prvom pozivu vrednosti su null, uid=* je default
+    else { this.filterString = "(uid=*)"; }
 
     this._userService.getUser(this.baseDN, this.scope, this.filterString)
     .subscribe(
@@ -90,30 +90,21 @@ export class UserSearchComponent implements OnInit {
     });
    
   }
-
-
-
 }
 
 function mapJsonUser(obj: any):ldapSearchData
 {
   return {
-    dn: obj.dn,
-    objectClass: obj.objectClass,
     uid: obj.uid,
     cn: obj.cn,
     sn:obj.cn,
     mail: obj.mail,
-    inetUserStatus: obj.inetUserStatus
   }
 }
 
 export interface ldapSearchData {
-    dn: string;
-    objectClass: Array<string>;
     uid: string;
     cn: string;
     sn:string;
     mail: string;
-    inetUserStatus: string;
 }

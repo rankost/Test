@@ -17,7 +17,7 @@ export class UserServiceService {
 
   constructor(private _http: HttpClient) { }
 
-  addUser(user: any) {
+  addUser(user) {
     // const headers = new Headers({'Content-Type': 'application/json'});
     const head = {'Content-Type': 'application/json'};
 
