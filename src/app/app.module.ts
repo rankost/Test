@@ -6,7 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import "reflect-metadata";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTableModule} from '@angular/cdk/table';
-import {MatButtonModule, MatCheckboxModule, MatSelectModule, MatInputModule, MatTableModule, MatPaginatorModule, } from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatSelectModule, MatInputModule, MatTableModule, MatPaginatorModule, MatCardModule, MatStepperModule } from '@angular/material';
+import {MatTabsModule} from '@angular/material/tabs';
 import { AuthGuard } from './auth.guard';
 
 
@@ -38,6 +39,9 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     MatTableModule,
     CdkTableModule,
     MatPaginatorModule,
+    MatTabsModule,
+    MatCardModule,
+    MatStepperModule,
     RouterModule.forRoot([
       {
         path: '', 

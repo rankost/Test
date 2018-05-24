@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { createJsonMode, resultStatus } from '../shared/create-json-model';
 import { NameValue, Value } from '../shared/name-value';
 import { Jsonp } from '@angular/http';
@@ -16,11 +16,17 @@ import {ErrorStateMatcher} from '@angular/material/core';
 })
 
 export class UsersComponent implements OnInit {
-    firstName = new FormControl('', [ Validators.required ]);
-    lastName = new FormControl('', [ Validators.required ]);
-    password = new FormControl('', [ Validators.required ]);
-    mailQuota = new FormControl();
-    mailMsgQuota = new FormControl();
+
+    firstFormGroup = new FormGroup({
+      firstName: new FormControl('', [ Validators.required ]),
+      lastName: new FormControl('', [ Validators.required ]),
+      password: new FormControl('', [ Validators.required ])
+    });
+
+    secondFormGroup = new FormGroup({
+      mailQuota: new FormControl(),
+      mailMsgQuota: new FormControl()
+    });
 
   languages =
   [
@@ -58,7 +64,10 @@ export class UsersComponent implements OnInit {
   }
 
   notEntered() {
-    return this.firstName.hasError('required') || this.lastName.hasError('required');
+    if (this.firstFormGroup.value.firstName == '' || this.firstFormGroup.value.lastName == '' || this.firstFormGroup.value.password == '') {
+      return true;
+    }
+    return false;
   }
 
   onSubmit() {
@@ -67,45 +76,36 @@ export class UsersComponent implements OnInit {
     var attributes = [];
     var valuesObjClas = [];
 
-    valuesObjClas.push({"value": "top"});
-    valuesObjClas.push({"value": "person"});
-    valuesObjClas.push({"value": "account"});
-    valuesObjClas.push({"value": "inetuser"});
-    valuesObjClas.push({"value": "inetOrgPerson"});
-    valuesObjClas.push({"value": "ipuser"});
-    valuesObjClas.push({"value": "organizationalperson"});
-    valuesObjClas.push({"value": "iplanetpreferences"});
-    valuesObjClas.push({"value": "daventity"});
-    valuesObjClas.push({"value": "inetLocalMailRecipient"});
-    valuesObjClas.push({"value": "icscalendaruser"});
-    valuesObjClas.push({"value": "inetmailUser"});
+    var listObjClass = ["top", "person", "account", "inetuser", "inetOrgPerson", "ipuser", "organizationalperson", "iplanetpreferences", 
+    "daventity", "inetLocalMailRecipient", "icscalendaruser", "inetmailUser"];
+
+    listObjClass.forEach(element => {
+      valuesObjClas.push({"value": element});
+    });
+
     attributes.push({"name": "Objectclass", "values": valuesObjClas});
 
-    var uid = this.firstName.value + "_" + this.lastName.value;
+    var uid = this.firstFormGroup.value.firstName + "_" + this.firstFormGroup.value.lastName;
     
     attributes.push({"name": "uid", "values": [{ "value": uid }]});
 
-    attributes.push({"name": "givenName", "values": [{"value": this.firstName.value}]}); //first name
+    attributes.push({"name": "givenName", "values": [{"value": this.firstFormGroup.value.firstName}]}); //first name
 
-    attributes.push({"name": "cn", "values": [{"value": this.firstName.value + " " + this.lastName.value}]});
+    attributes.push({"name": "cn", "values": [{"value": this.firstFormGroup.value.firstName + " " + this.firstFormGroup.value.lastName}]});
 
-    attributes.push({"name": "sn", "values": [{"value": this.lastName.value}]});
+    attributes.push({"name": "sn", "values": [{"value": this.firstFormGroup.value.lastName}]});
 
     attributes.push({"name": "inetUserStatus", "values": [{"value": "active"}]});
 
-    attributes.push({"name": "userPassword", "values": [{"value": this.password.value}]});
+    attributes.push({"name": "userPassword", "values": [{"value": this.firstFormGroup.value.password}]});
 
     attributes.push({"name": "preferredlanguage", "values": [{"value": this.selectedLanguage}]});
-
-    
-
-
 
     if(this.selectedPackage != null) {
       attributes.push({"name": "inetCos", "values": [{"value": this.selectedPackage}]});
 
       // za E-mail
-      attributes.push({"name": "mail", "values": [{"value": this.firstName.value + "." + this.lastName.value + "@domen1.rs"}]});
+      attributes.push({"name": "mail", "values": [{"value": this.firstFormGroup.value.firstName + "." + this.firstFormGroup.value.lastName + "@domen1.rs"}]});
       attributes.push({"name": "mailUserStatus", "values": [{"value": "active"}]});
 
       attributes.push({"name": "mailHost", "values": [{"value": "ucs7.sun.saga.rs"}]});
@@ -117,17 +117,16 @@ export class UsersComponent implements OnInit {
       // dodati atribute sa vrednostima iz paketa
       this.packages.forEach(element => { 
         if (element.id == this.selectedPackage) {
-          if (this.mailQuota.value != null) { attributes.push({"name": "mailQuota", "values": [{"value": this.mailQuota.value}]}); }
+          if (this.secondFormGroup.value.mailQuota != null) { attributes.push({"name": "mailQuota", "values": [{"value": this.secondFormGroup.value.mailQuota}]}); }
           else { attributes.push({"name": "mailQuota", "values": [{"value": element.attributes.mailQuota}]}); }
           
-          if(this.mailMsgQuota.value != null) { attributes.push({"name": "mailMsgQuota", "values": [{"value": this.mailMsgQuota.value}]}); }
+          if(this.secondFormGroup.value.mailMsgQuota != null) { attributes.push({"name": "mailMsgQuota", "values": [{"value": this.secondFormGroup.value.mailMsgQuota}]}); }
           else { attributes.push({"name": "mailMsgQuota", "values": [{"value": element.attributes.mailMsgQuota}]}); }
 
           attributes.push({"name": "mailMsgMaxBlocks", "values": [{"value": element.attributes.mailMsgMaxBlocks}]});
           attributes.push({"name": "mailAllowedServiceAccess", "values": [{"value": element.attributes.mailAllowedServiceAccess}]});
         }
       });
-
 
       // za Kalendar
       attributes.push({"name": "icsTimezone", "values": [{"value": "Europe/Paris"}]});

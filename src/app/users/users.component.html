@@ -1,7 +1,109 @@
 <div class="container">
-  <div class="row">
-    <div class="form-horizontal col-md-5">
-      <form class="example-form" (ngSubmit)="onSubmit()">
+  <h3>Unos korisnika</h3>
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Unos osnovnih informacija</ng-template>
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Ime" formControlName="firstName" [errorStateMatcher]="matcher">
+                  <mat-hint>Unesite ime korinsika</mat-hint>
+                  <mat-error *ngIf="firstFormGroup.value.firstName == ''">
+                    Ime je
+                    <strong>obavezno!</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Prezime" formControlName="lastName" [errorStateMatcher]="matcher">
+                  <mat-hint>Unesite prezime korinsika</mat-hint>
+                  <mat-error *ngIf="firstFormGroup.value.lastName == ''">
+                    Prezime je
+                    <strong>obavezno!</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Lozinka" formControlName="password" [errorStateMatcher]="matcher" type="password">
+                  <mat-hint>Unesite lozinku</mat-hint>
+                  <mat-error *ngIf="firstFormGroup.value.password == ''">
+                    Lozinka je
+                    <strong>obavezna!</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <mat-select [(ngModel)]="selectedLanguage" [ngModelOptions]="{standalone: true}" placeholder="Jezik">
+                      <mat-option *ngFor="let l of languages" [value]="l.id">
+                        {{ l.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+            <div>
+              <button mat-button matStepperNext [disabled]="notEntered()">Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+              <ng-template matStepLabel>Izbor servisnog paketa</ng-template>
+              <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <mat-select [(ngModel)]="selectedPackage" [ngModelOptions]="{standalone: true}" placeholder="Servisni paket">
+                      <mat-option *ngFor="let p of packages" [value]="p.id">
+                        {{ p.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div *ngIf="selectedPackage != null">
+                  <mat-card>
+                    <mat-card-content>
+                      <h4 class="example-h2">Podešavanja servisnog paketa</h4>
+                      <mat-tab-group class="demo-tab-group">
+                        <mat-tab label="Mail">
+                          <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Mesto na disku" formControlName="mailQuota">
+                              <mat-hint>Koristite K, M, G za kilo, mega, i giga bytes respektivno</mat-hint>
+                            </mat-form-field>
+                          </div>
+                          <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Broj poruka" formControlName="mailMsgQuota">
+                              <mat-hint>Broj poruka</mat-hint>
+                            </mat-form-field>
+                          </div>
+                        </mat-tab>
+                        <mat-tab label="Kalendar">
+                          No content
+                        </mat-tab>
+                      </mat-tab-group>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+              <div>
+                  <br>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Kraj</ng-template>
+          You are now done,.
+          <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="notEntered()">Kreiraj</button>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+      <!-- <form class="example-form" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Ime" [formControl]="firstName" [errorStateMatcher]="matcher">
@@ -34,7 +136,7 @@
         </div>
         <div class="form-group">
           <mat-form-field class="example-full-width">
-            <mat-select [(ngModel)]="selectedLanguage"  [ngModelOptions]="{standalone: true}" placeholder="Jezik">
+            <mat-select [(ngModel)]="selectedLanguage" [ngModelOptions]="{standalone: true}" placeholder="Jezik">
               <mat-option *ngFor="let l of languages" [value]="l.id">
                 {{ l.name }}
               </mat-option>
@@ -43,7 +145,7 @@
         </div>
         <div class="form-group">
           <mat-form-field class="example-full-width">
-            <mat-select [(ngModel)]="selectedPackage"  [ngModelOptions]="{standalone: true}" placeholder="Servisni paket">
+            <mat-select [(ngModel)]="selectedPackage" [ngModelOptions]="{standalone: true}" placeholder="Servisni paket">
               <mat-option *ngFor="let p of packages" [value]="p.id">
                 {{ p.name }}
               </mat-option>
@@ -51,28 +153,37 @@
           </mat-form-field>
         </div>
         <div *ngIf="selectedPackage != null">
-          <h3>Podešavanja servisnog paketa</h3>
-
-          <div class="form-group">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Mesto na disku" [formControl]="mailQuota" >
-              <mat-hint>Koristite K, M, G za kilo, mega, i giga bytes respektivno</mat-hint>
-            </mat-form-field>
-          </div>
-
-          <div class="form-group">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Broj poruka" [formControl]="mailMsgQuota" >
-              <mat-hint>Broj poruka</mat-hint>
-            </mat-form-field>
-          </div>
-
+          <mat-card>
+            <mat-card-content>
+              <h2 class="example-h2">Podešavanja servisnog paketa</h2>
+              <mat-tab-group class="demo-tab-group">
+                <mat-tab label="Mail">
+                  <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Mesto na disku" [formControl]="mailQuota">
+                      <mat-hint>Koristite K, M, G za kilo, mega, i giga bytes respektivno</mat-hint>
+                    </mat-form-field>
+                  </div>
+                  <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Broj poruka" [formControl]="mailMsgQuota">
+                      <mat-hint>Broj poruka</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </mat-tab>
+                <mat-tab label="Kalendar">
+                  No content
+                </mat-tab>
+              </mat-tab-group>
+            </mat-card-content>
+          </mat-card>
         </div>
+        <br>
         <button mat-raised-button color="primary" [disabled]="notEntered()">Kreiraj</button>
         <hr />
-      </form>
+      </form>-->
       <div *ngIf="!IsHidden">
-        <div class="alert alert-success" *ngIf="onlyStatus === 'SUCCESS'; else errorResponse">
+        <div class="alert alert-success" *ngIf="onlyStatus == 'SUCCESS'; else errorResponse">
           <strong>{{ message }}</strong>
         </div>
         <ng-template #errorResponse>
@@ -80,7 +191,5 @@
             <strong>{{ message }}</strong>
           </div>
         </ng-template>
-      </div>
-    </div>
-  </div>
+      </div> 
 </div>
