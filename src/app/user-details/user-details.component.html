@@ -1,66 +1,91 @@
-<h3>Informacije o korisniku</h3>
-<hr />
-<form class="example-form" *ngIf="user != null">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Login ID" disabled value="{{ user.uid }}">
-  </mat-form-field>
-
-  <table class="example-full-width" cellspacing="0"><tr>
-    <td><mat-form-field class="example-full-width">
-      <input matInput placeholder="Ime" value="{{ user.cn }}">
-    </mat-form-field></td>
-    <td><mat-form-field class="example-full-width">
-      <input matInput placeholder="Prezime" value="{{ user.sn }}">
-    </mat-form-field></td>
-  </tr></table>
-  <div class="form-group">
-      <mat-form-field class="example-full-width">
-          <input matInput placeholder="Status korisnika" value="{{ user.inetUserStatus }}">
-        </mat-form-field>
-  </div>
-</form>
-<h3>Kontakt informacije</h3>
-<hr />
-<form class="example-form" *ngIf="user != null">
-
-</form>
-<h3>Mail servis detalji</h3>
-<hr />
-<form class="example-form" *ngIf="user != null">
-  <div class="form-group">
-      <mat-form-field class="example-full-width">
-          <input matInput placeholder="Mail host" value="{{ user.mailHost }}">
-        </mat-form-field>
-  </div>
-  <div class="form-group">
-      <mat-form-field class="example-full-width">
-          <input matInput placeholder="Email adresa" value="{{ user.mail }}">
-        </mat-form-field>
-  </div>
-  <div class="form-group">
-      <mat-form-field class="example-full-width">
-          <input matInput placeholder="Broj poruka" value="{{ user.mailMsgQuota }}">
-        </mat-form-field>
-  </div>
-  <div class="form-group">
-      <mat-form-field class="example-full-width">
-          <input matInput placeholder="Mail servis status" value="{{ user.mailUserStatus }}">
-        </mat-form-field>
-  </div>
-
-
-</form>
-<h3>Kalendar servis detalji</h3>
-<hr />
-<form class="example-form" *ngIf="user != null">
-    <div class="form-group">
-        <mat-form-field class="example-full-width">
-            <input matInput placeholder="Vremenska zona" value="{{ user.icsTimezone }}">
-          </mat-form-field>
-    </div>
-    <div class="form-group">
-        <mat-form-field class="example-full-width">
-            <input matInput placeholder="Klandar servis status" value="{{ user.icsStatus }}">
-          </mat-form-field>
-    </div>
-</form>
+<mat-card>
+  <mat-card-content>
+    <h2 class="example-h2">Informacije o korisniku</h2>
+    <mat-tab-group class="demo-tab-group">
+      <mat-tab label="Osnovne informacije">
+        <div class="demo-tab-content">
+          <br>
+          <form class="example-form" *ngIf="user != null">
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Login ID" disabled value="{{ user.uid }}">
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Ime" value="{{ user.givenName }}">
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Prezime" value="{{ user.sn }}">
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Status korisnika" value="{{ user.inetUserStatus }}">
+              </mat-form-field>
+            </div>
+          </form>
+        </div>
+      </mat-tab>
+      <mat-tab label="Servisni paket" *ngIf="user != null">
+        <div id="accordion">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  {{ user.inetCOS }}
+                </button>
+              </h5>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+              <div class="card-body">
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Mail kvota" value="{{ user.mailQuota }}">
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Maksimalna veličina priloga" value="{{ user.mailMsgQuota }}">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Mail servis">
+        <div class="demo-tab-content" *ngIf="user != null">
+          <br>
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Mail host" value="{{ user.mailHost }}">
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Mail" value="{{ user.mail }}">
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Mail servis status" value="{{ user.mailUserStatus }}">
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Kalendar servis">
+        <div class="demo-tab-content" *ngIf="user != null">
+          <br>
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Vremenska zona" value="{{ user.icsTimezone }}">
+                </mat-form-field>
+              </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>
