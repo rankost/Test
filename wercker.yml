@@ -1,11 +1,28 @@
-build:
-  box: node:latest
+box: node:latest
+workdir:
   steps:
-    - internal/docker-build: 
-        dockerfile: Dockerfile 
-        image-name: test
+    # Set wordir
+    - WORKDIR /app
+    # Copy src to workdir
+    - COPY . /app/
+build:
+  steps:
+    # Install latest npm version
+    - npm-install npm@latest -g
+    # Install latest angular-cli
+    - npm-install -g @angular/cli@latest --unsafe-perm
+    # Install npm dependencies
+    - npm-isntall --unsafe-perm
+serve:
+  steps:
+    # Serve application
+    - ng serve --host 0.0.0.0 --port 8081
+    # Expose port
+    - EXPOSE 8081
+push:
+  steps:
+    # Push to public docker repo
     - internal/docker-push: 
-        image: test
         username: $USERNAME
         password: $PASSWORD
         repository: $USERNAME/test
