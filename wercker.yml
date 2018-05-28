@@ -8,6 +8,5 @@ build:
         image-name: test
         username: $USERNAME
         password: $PASSWORD
-        registry: https://hub.docker.com/r
         repository: $USERNAME/test
         tag: latest
