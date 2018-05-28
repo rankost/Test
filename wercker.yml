@@ -8,17 +8,27 @@ workdir:
 build:
   steps:
     # Install latest npm version
-    - npm-install npm@latest -g
+    - script:
+        name: install latest npm version
+        code: npm install npm@latest -g
     # Install latest angular-cli
-    - npm-install -g @angular/cli@latest --unsafe-perm
+    - script:
+        name: install latest angular-cli version
+        code: npm install -g @angular/cli@latest --unsafe-perm
     # Install npm dependencies
-    - npm-isntall --unsafe-perm
+    - script:
+        name: install npm dependencies
+        code: npm install --unsafe-perm
 serve:
   steps:
     # Serve application
-    - ng serve --host 0.0.0.0 --port 8081
+    - script:
+        name: serve app
+        code: ng serve --host 0.0.0.0 --port 8081
     # Expose port
-    - EXPOSE 8081
+    - script:
+        name: expose port
+        code: EXPOSE 8081
 push:
   steps:
     # Push to public docker repo
