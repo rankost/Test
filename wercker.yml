@@ -5,8 +5,8 @@ build:
         tag: test-image 
     - internal/docker-push: 
         image: test-image
-        username: $USERNAME # Docker Hub username. When using CLI, set using "export X_USERNAME="  
-        password: $PASSWORD # Docker Hub password. When using CLI, set using "export X_PASSWORD=" 
+        username: $USERNAME
+        password: $PASSWORD
         registry: https://hub.docker.com
         repository: $USERNAME/test
         tag: latest
