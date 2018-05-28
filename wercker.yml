@@ -3,7 +3,7 @@ build:
   steps:
     - internal/docker-build: 
         dockerfile: Dockerfile 
-        tag: $USERNAME/test
+        image-name: $USERNAME/test
     - internal/docker-push: 
         image: $USERNAME/test
         username: $USERNAME
