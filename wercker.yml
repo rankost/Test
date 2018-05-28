@@ -5,7 +5,7 @@ build:
         dockerfile: Dockerfile 
         image-name: test
     - internal/docker-push: 
-        image-name: test
+        image:-name test
         username: $USERNAME
         password: $PASSWORD
         repository: $USERNAME/test
