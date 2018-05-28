@@ -9,4 +9,4 @@ build:
         username: $USERNAME
         password: $PASSWORD
         repository: $USERNAME/test
-        tag: latest
+        tag: latest 
