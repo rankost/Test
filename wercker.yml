@@ -1,14 +1,6 @@
 box: node:latest
 build:
   steps:
-    # Set wordir
-    - script:
-        name: set workdir
-        code: WORKDIR /app
-    # Copy src to workdir
-    - script:
-        name: copy src to workdir
-        code: COPY . /app/
     # Install latest npm version
     - script:
         name: install latest npm version
