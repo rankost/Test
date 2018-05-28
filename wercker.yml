@@ -3,9 +3,9 @@ build:
   steps:
     - internal/docker-build: 
         dockerfile: Dockerfile 
-        image-name: $USERNAME/test
+        image-name: test
     - internal/docker-push: 
-        image: $USERNAME/test
+        image-name: test
         username: $USERNAME
         password: $PASSWORD
         registry: https://hub.docker.com
