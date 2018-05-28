@@ -13,8 +13,6 @@ build:
     - script:
         name: install npm dependencies
         code: npm install --unsafe-perm
-serve:
-  steps:
     # Serve application
     - script:
         name: serve app
@@ -23,8 +21,6 @@ serve:
     - script:
         name: expose port
         code: EXPOSE 8081
-push:
-  steps:
     # Push to public docker repo
     - internal/docker-push: 
         username: $USERNAME
