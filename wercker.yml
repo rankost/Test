@@ -14,19 +14,14 @@ build:
         name: install npm dependencies
         code: npm install --unsafe-perm
     # Serve application
-    - internal/shell:
-      cmd: /bin/bash 
-      code: |
-        cd /pipeline/source
-        ng serve --host 0.0.0.0 --port 8081 &
     #- script:
     #    name: serve app
-    #    code: |
-    #      cd /pipeline/source
-    #      ng serve --host 0.0.0.0 --port 8081 &
+    #    code: ng serve --host 0.0.0.0 --port 8081 &
     # Push to public docker repo
     - internal/docker-push: 
         username: $USERNAME
         password: $PASSWORD
         repository: $USERNAME/test
-        tag: latest 
+        tag: latest
+        working-dir: /pipeline/source
+        cmd: ng serve --host 0.0.0.0 --port 8081
