@@ -28,10 +28,6 @@ deploy-push:
     - script:
         name: Override httpd.conf
         code: yes | cp -rf httpd.conf /usr/local/apache2/conf/httpd.conf
-    # Grant apache to call backend service
-    - script:
-        name: Grant apache to call backend
-        code: /usr/sbin/setsebool -P httpd_can_network_connect 1
     # Push to public docker repo and serve application
     - internal/docker-push: 
         username: $USERNAME
