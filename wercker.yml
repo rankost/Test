@@ -13,11 +13,22 @@ build:
     - script:
         name: install npm dependencies
         code: npm install --unsafe-perm
+    # npm build
+    - script:
+        name: Build application
+        code: ng build
+deploy-push:
+    box: httpd:latest
+    steps:
+    # Moving contents of dist folder
+    - script:
+        name: Moving contents of dist folder
+        code: mv dist/delegatedAdminApp/* /usr/local/apache2/htdocs/
     # Push to public docker repo and serve application
     - internal/docker-push: 
         username: $USERNAME
         password: $PASSWORD
-        repository: $USERNAME/test
+        repository: $USERNAME/daApacheWercker
         tag: latest
-        working-dir: /pipeline/source
-        cmd: ng serve --host 0.0.0.0 --port 8081
+        # working-dir: /pipeline/source
+        cmd: httpd-foreground
