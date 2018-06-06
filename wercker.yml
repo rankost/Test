@@ -28,7 +28,7 @@ deploy-push:
     - internal/docker-push: 
         username: $USERNAME
         password: $PASSWORD
-        repository: $USERNAME/daApacheWercker
+        repository: $USERNAME/test
         tag: latest
         # working-dir: /pipeline/source
         cmd: httpd-foreground
